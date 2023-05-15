@@ -1,5 +1,7 @@
- <button>
-    <a routerLink="login" routerLinkActive="active"  routerLinkActive="active">login</a>
+ <button (click)="goToLogin()">Login
   </button>
- <!--<router-outlet></router-outlet> -->
+  <!-- <li *ngIf = "userIsAuthenticated">   -->
+    <button  (click)= "onLogout()">Logout</button>  
+  <!-- </li> -->
+<router-outlet></router-outlet>
  

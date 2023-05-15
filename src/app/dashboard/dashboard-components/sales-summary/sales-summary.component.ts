@@ -34,7 +34,8 @@ export type salesChartOptions = {
 export class SalesSummaryComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent = Object.create(null);
-  public salesChartOptions: Partial<salesChartOptions>;
+  public salesChartOptions: any;
+  //public salesChartOptions: salesChartOptions ;
   constructor() {
     this.salesChartOptions = {
       series: [

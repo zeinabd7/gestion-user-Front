@@ -1,0 +1,93 @@
+<div class="col-lg-7">
+  <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModalUser(template)">Add</button>
+</div>
+  
+<div class="card">
+  <div class="card-body">
+      <!-- title -->
+              <h4 class="card-title">List</h4>
+      <!-- title -->
+      <div class="table-responsive">
+          <table class="table align-middle">
+              <thead>
+                  <tr>
+                      <th class="text-dark font-medium fs-4">Nom</th>
+                      <th class="text-dark font-medium fs-4">Email</th>
+                      <th class="text-dark font-medium fs-4">Role</th>
+                      <th class="text-dark font-medium fs-4">Action</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let ts of users'>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <h5 class="mb-0 font-medium">{{ts.name}}</h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <h5 class="mb-0 font-medium">{{ts.email}}</h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <h5 class="mb-0 font-medium">{{ts.role}}</h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <button type="button" class="btn btn-warning"(click)="openEditForm(ts,template)">Modifier</button>
+                                <button type="button" class="btn btn-danger" (click)="deleteUser(ts.id)">Supprimer</button>
+                                  
+                            </div>
+                        </div>
+                    </td>
+                    
+                    
+                </tr>              
+            </tbody>
+          </table>
+      </div>
+  </div>
+  
+</div>
+<ng-template #template>
+<div class="row">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+<form [formGroup]="userForm" (ngSubmit)="create()" >
+    <div class="form-row" >
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Nom</label>
+            <input  formControlName="name" class="form-control"  placeholder="Nom">
+          </div>
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" formControlName="email" class="form-control" id="inputEmail4" placeholder="Email">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Mot de passe</label>
+        <input type="password" formControlName="password" class="form-control" id="inputPassword4" placeholder="Password">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Role</label>
+        <input type="text" formControlName="role" class="form-control" id="inputPassword4" placeholder="Role">
+      </div>
+    </div>
+    
+   <!--  
+    <button type="submit" class="btn btn-primary" >{{this.userForm.value ? 'Update': 'Save'}}</button> -->
+    <button type="submit" class="btn btn-dark btn-pill" >Ajouter</button>
+    <button type="button" class="btn btn-dark btn-pill" (click)="close()">Annuler</button>
+  </form>
+  </div>
+  </div>
+</ng-template>
+
