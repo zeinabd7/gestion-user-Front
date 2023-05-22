@@ -12,12 +12,14 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { UsersModule } from './users/users.module';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { EntreprisesComponent } from './entreprises/entreprises/entreprises.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     EntreprisesComponent,
+    HeaderComponent,
     //UsersComponent
   ],
   imports: [

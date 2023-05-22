@@ -1,5 +1,7 @@
 <div class="col-lg-7">
-  <button class="btn mt-3" type="submit" style="color: blue;" (click)="goToCreate()">Add</button>
+  <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModal(template)">Ajouter Organisation</button>
+ 
+
 </div>
 
 <div class="card">
@@ -12,17 +14,72 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <th class="text-dark font-medium fs-4">Team Lead</th>
-                        <th class="text-dark font-medium fs-4">Project</th>
-                        <th class="text-dark font-medium fs-4">Status</th>
-                        <th class="text-dark font-medium fs-4">Weeks</th>
-                        <th class="text-dark font-medium fs-4">Budget</th>
+                        <th class="text-dark font-medium fs-4">Nom</th>
+                        <th class="text-dark font-medium fs-4">Voir Administration</th>
+                        <th class="text-dark font-medium fs-4">Action</th>
                     </tr>
                 </thead>
-              
+                <tbody>
+                    <tr *ngFor='let ts of organizations'>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                    <h5 class="mb-0 font-medium">{{ts.name}}</h5> 
+                                    
+                                </div>
+                            </div>
+                        </td>
+                       
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                    <!-- <h5 class="mb-0 font-medium">{{ts.users}}</h5> -->
+                                    <button type="button" class="btn btn-info" (click)="adminList()">Voir administrateurs</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                    <button type="button" class="btn btn-warning">Modifier</button>
+                                    <button type="button" class="btn btn-danger" >Supprimer</button>
+                                    
+                                </div>
+                            </div>
+                        </td>
+                        
+                        
+                    </tr>              
+                </tbody>
             </table>
         </div>
     </div>
     
 </div>
-<!-- <router-outlet></router-outlet> -->
+<ng-template #template>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header pmd-modal-border">
+                <h2 class="modal-title">Organisations</h2>
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="organizationForm" (ngSubmit)="create()">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="full-name">Nom</label>
+                        <input id="full-name" class="form-control" type="text" formControlName="name">
+                    </div>
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="full-name">Entreprise</label>
+                        <select  formControlName="entreprise_id" class="mat-input form-control">
+                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn pmd-ripple-effect btn-dark pmd-btn-flat" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -12,16 +12,26 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
         const user = this.authService.userValue;
-        if (user && user.role==='admin') {
+        let role = this.authService.getRole()
+        /* if (role ==='admin') {
+            console.log('oka');
             // logged in so return true
             this.router.navigate(['users']);
-            console.log('oka');
             return true;
             
         } else {
+            this.router.navigate(['/login']);
+            return false;
+        }  */
+        if (role ) {
+           // console.log('oka');
+            // logged in so return true
+            //this.router.navigate(['users']);
+            return true;
             
-            this.router.navigate(['/dashboard/top-cards']);
-        }
-        return false;
+        }  
+            this.router.navigate(['/login']);
+            return false;
+    
     }
 }

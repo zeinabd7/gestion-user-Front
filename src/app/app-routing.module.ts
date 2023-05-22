@@ -6,6 +6,8 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { EntreprisesComponent } from './entreprises/entreprises/entreprises.component';
 import { UsersComponent } from './users/users.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PermissionsGuard } from './guards/permissions.guard';
+import { AdminOrgaComponent } from './organizations/admin-orga/admin-orga.component';
 //import { UsersModule } from './users/users.module';
 //import { UsersComponent } from './users/users.component';
 //import { UsersModule } from './users/users.module';
@@ -14,12 +16,12 @@ import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   {path:'dashboard',loadChildren:() => DashboardModule},
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent},
   {path:'organization',loadChildren:() => OrganizationsModule},
   {path:'entreprises',component:EntreprisesComponent},
   //{ path: 'users', loadChildren:()=>UsersModule},
-  { path: 'users', component: UsersComponent, canActivate:[AuthGuard] },
-  
+  { path: 'users', component: UsersComponent,canActivate:[PermissionsGuard]},
+  {path:'admin-orga',component:AdminOrgaComponent}
   //{ path: '**', redirectTo: '' }
   
   ];

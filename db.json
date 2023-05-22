@@ -1,284 +1,49 @@
 {
-  "login": [
+  "users": [
     {
-      "id": 1,
-      "username": "test",
-      "password": "test"
-    },
-    {
-      "username": "test",
+      "name": "TEST123",
+      "username": "test123",
       "password": "test",
-      "id": 2
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 3
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 4
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 5
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 6
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 7
-    },
-    {
-      "username": "test",
-      "password": "test",
+      "role": "user",
       "id": 8
     },
     {
-      "username": "test",
-      "password": "test",
+      "name": "admin",
+      "username": "admin",
+      "password": "admin",
+      "role": "admin",
       "id": 9
     },
     {
-      "username": "test",
+      "name": "TEST123",
+      "username": "test123",
       "password": "test",
-      "id": 10
-    },
-    {
-      "username": "test",
-      "password": "test",
+      "role": "user",
+      "entreprise_id": 1,
       "id": 11
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 12
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 13
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 14
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 15
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 16
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 17
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 18
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 19
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 20
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 21
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 22
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 23
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 24
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 25
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 26
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 27
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 28
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 29
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 30
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 31
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 32
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 33
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 34
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 35
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 36
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 37
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 38
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 39
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 40
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 41
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 42
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 43
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 44
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 45
-    },
-    {
-      "username": "test",
-      "password": "test",
-      "id": 46
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 47
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 48
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 49
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "id": 50
     }
   ],
-  "users": [
+  "entreprises": [
     {
-      "name": "test",
-      "email": "test",
-      "password": "test",
-      "role": "",
-      "id": 3
+      "name": "Entreprise1",
+      "owner": "Owner1",
+      "id": 1
     },
     {
-      "name": "test2",
-      "email": "test2@gn",
-      "password": "gg",
-      "role": "adm",
-      "id": 5
+      "name": "Entreprise2",
+      "owner": "owner 2",
+      "id": 2
+    }
+  ],
+  "organizations": [
+    {
+      "name": "Organization1",
+      "id": 1,
+      "entreprise_id": 1
     },
     {
-      "name": "admin",
-      "email": "admin@admin",
-      "password": "admin",
-      "role": "admin",
-      "id": 6
-    },
-    {
-      "name": "admin",
-      "email": "admin@admin",
-      "password": "admin",
-      "role": "admins",
-      "id": 7
+      "name": "Organisation 2",
+      "id": 2
     }
   ]
 }

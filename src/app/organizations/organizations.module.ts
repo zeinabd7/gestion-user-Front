@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule,Routes } from '@angular/router';
 import { OrganizationsComponent } from './organizations.component';
 import { OrganizationsCreateComponent } from './organizations-components/organizations-create/organizations-create.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { AdminOrgaComponent } from './admin-orga/admin-orga.component';
 
 const routes :Routes=[
   {
@@ -17,11 +19,14 @@ const routes :Routes=[
 @NgModule({
   declarations: [
     OrganizationsCreateComponent,
-    OrganizationsComponent
+    OrganizationsComponent,
+    AdminOrgaComponent
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 })
 export class OrganizationsModule { }

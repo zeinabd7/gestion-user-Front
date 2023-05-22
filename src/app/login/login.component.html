@@ -16,18 +16,16 @@
         </div>
         <button class="btn mt-3">Login</button>
     </form> -->
-    <form class="p-3 mt-3"  [formGroup]="loginForm">
+    <form class="p-3 mt-3"  [formGroup]="loginForm" (ngSubmit)="Login()">
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="text" name="username" formControlName="username" id="userName"  placeholder="Username">
+            <input type="text" name="username" formControlName="username"  placeholder="Username">
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password"  id="pwd" formControlName="password" placeholder="Password">
+            <input type="password" name="password"   formControlName="password" placeholder="Password">
         </div>
-        <button class="btn mt-3" type="submit" (click)="Login()" >Login</button>
+        <button class="btn mt-3" type="submit"  >Login</button>
     </form>
-    <div class="text-center fs-6">
-        <a href="#">Forget password?</a> or <a href="#">Sign up</a>
-    </div>
+    
 </div>

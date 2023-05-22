@@ -12,13 +12,5 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() { }
-  goToOrga(){
-    this.router.navigate(['organizations']);
-  }
-  goToUsers(){
-    this.router.navigate(['users']);
-  }
-  goToEntreprises(){
-    this.router.navigate(['entreprises']);
-  }
+ 
 }
