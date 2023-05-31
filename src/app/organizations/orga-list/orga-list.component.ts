@@ -1,4 +1,5 @@
-import { Component, TemplateRef } from '@angular/core';
+import { EntreprisesComponent } from './../../entreprises/entreprises/entreprises.component';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -20,6 +21,8 @@ export class OrgaListComponent {
   template!: TemplateRef<any> ;
   entreprises!:Entreprises[];
   entreprise_id:any;
+
+  @ViewChild(EntreprisesComponent) entrepriseComponent!: EntreprisesComponent;
    constructor(private router:Router,private orgaService:OrganizationsService,private _fb:FormBuilder,private modalService:BsModalService,private _entrepriseService : EntreprisesService,private route:ActivatedRoute){
     this.organizationForm = this._fb.group({
       id:[''],
@@ -35,21 +38,11 @@ export class OrgaListComponent {
       
   }
   ngOnInit(): void {
-      //this.entreprise_id =1;
-        this.orgaService.getOrganizations().subscribe((data: Organizations[])=>{
-        this.organizations=data;
-        this.organizations.forEach((org: Organizations) => {
-          this.entreprise_id = org.entreprise_id;
-          
-        });
-        this.showOrganizations(this.entreprise_id)
-        }); 
-      
-      
-      
-        
+	this.entreprise_id = this._entrepriseService.getEntrepriseId()
+    this.showOrganizations(this.entreprise_id)
       }
-      showOrganizations(entreprise_id:number){
+	  
+    showOrganizations(entreprise_id:number){
         this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
           next: (data:any) =>  {
             this.organizations=data;
@@ -59,24 +52,23 @@ export class OrgaListComponent {
           },
         });
       }
-create(){
-  
-  if (this.organizationForm.valid){
-    // if(this.organizationForm.value){
-    //   this.openEditForm
-    //   console.log(this.organizationForm.value);
-      
-    // }
-    this.orgaService.addOrganization(this.organizationForm.value).subscribe({
-      next: () => {
-        console.log(this.organizationForm.value);
-        window.location.reload();
-      },
-      error: (err: any) => {
-        console.error(err);
-      },
-    });
-}
+	create(){
+		if (this.organizationForm.valid){
+			// if(this.organizationForm.value){
+			//   this.openEditForm
+			//   console.log(this.organizationForm.value);
+			
+			// }
+			this.orgaService.addOrganization(this.organizationForm.value).subscribe({
+			next: () => {
+				console.log(this.organizationForm.value);
+				window.location.reload();
+			},
+			error: (err: any) => {
+				console.error(err);
+			},
+			});
+		}
 }
 openEditForm(data:any,template: TemplateRef<any>){
   this.modalRef = this.modalService.show(template);
