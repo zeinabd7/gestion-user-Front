@@ -9,6 +9,8 @@ import { Organizations } from '../organizations/data';
 export class EntreprisesService {
   entreprises!:Entreprises[];
   organizations!:Organizations[];
+  private entrepriseId: any;
+
   constructor(private http:HttpClient) { 
     this.entreprises=this.entreprises;
   }
@@ -32,6 +34,14 @@ export class EntreprisesService {
     }
     getOrganizationsbyEntreprise(){
      }
-    }
+
+	setEntrepriseId(id: any): void {
+		this.entrepriseId = id;
+	}
+
+	getEntrepriseId(): any {
+		return this.entrepriseId;
+	}
+}
 
 

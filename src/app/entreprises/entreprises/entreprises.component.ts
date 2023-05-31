@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Entreprises } from '../data';
@@ -20,7 +20,9 @@ export class EntreprisesComponent {
   template!: TemplateRef<any> ;
   entreprises?: Entreprises[];
   organizations!:Organizations[];
+  enterprise_id!: number;
   data:any;
+  @Output() openOrganizations: EventEmitter<any> = new EventEmitter<any>();
   //entrepriseId!:number;
   constructor(private modalService:BsModalService,private _fb: FormBuilder,private _entrepriseService:EntreprisesService,private _orgaService:OrganizationsService,private router:Router,private http:HttpClient){
     //this.user=user;
@@ -68,9 +70,21 @@ create(){
 
 }
 }
-open(){
-  this.modalService.show(OrgaListComponent);
+open(enterprise_id: any) {
+	this._entrepriseService.setEntrepriseId(enterprise_id);
+	this.modalService.show(OrgaListComponent)
 }
+	  
+showOrganizations(entreprise_id:number){
+        this._orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
+          next: (data:any) =>  {
+            this.organizations=data;
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        });
+      }
 openModal(template: TemplateRef<any>){
   this.entrepriseForm = this._fb.group({
     id:'',

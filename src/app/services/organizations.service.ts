@@ -1,5 +1,5 @@
+import { Organizations } from 'src/app/organizations/data';
 import { Injectable, TemplateRef } from '@angular/core';
-import { Organizations } from '../organizations/data';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
@@ -37,8 +37,8 @@ export class OrganizationsService {
     this.use.openModalUser(this.template);
   } */
   getOrganizationsbyEntrepriseId(entrepriseId:number):Observable<any>{
-    const url = `http://localhost:3000/organizations?entreprise_id=${entrepriseId}`;
-  return this.http.get<any>(url);
+    const organizations = `http://localhost:3000/organizations?entreprise_id=${entrepriseId}`;
+  	return this.http.get<any>(organizations);
   }
 
 
