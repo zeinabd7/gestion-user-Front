@@ -5,14 +5,12 @@ import { OrganizationsComponent } from './organizations.component';
 import { OrganizationsCreateComponent } from './organizations-components/organizations-create/organizations-create.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AdminOrgaComponent } from './admin-orga/admin-orga.component';
+import { EditOrgaComponent } from './edit-orga/edit-orga.component';
+import { OrgaListComponent } from './orga-list/orga-list.component';
 
 const routes :Routes=[
-  {
-    path:'organizations', component:OrganizationsComponent,
-    children:[
-      { path: 'organizations-create', component:OrganizationsCreateComponent }
-    ]
-  }
+  {path:'organizations', component:OrganizationsComponent,},
+  {path:'organizations/:entreprise_id',component:OrganizationsComponent}
 ];
 
 
@@ -20,7 +18,9 @@ const routes :Routes=[
   declarations: [
     OrganizationsCreateComponent,
     OrganizationsComponent,
-    AdminOrgaComponent
+    AdminOrgaComponent,
+    EditOrgaComponent,
+    OrgaListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

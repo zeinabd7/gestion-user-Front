@@ -5,6 +5,9 @@ import { Entreprises } from '../data';
 import { EntreprisesService } from 'src/app/services/entreprises.service';
 import { OrganizationsService } from 'src/app/services/organizations.service';
 import { Organizations } from 'src/app/organizations/data';
+import { Router } from '@angular/router';
+import { OrgaListComponent } from 'src/app/organizations/orga-list/orga-list.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-entreprises',
@@ -16,24 +19,43 @@ export class EntreprisesComponent {
   modalRef?:BsModalRef;
   template!: TemplateRef<any> ;
   entreprises?: Entreprises[];
-  organizations?:Organizations[];
-  constructor(private modalService:BsModalService,private _fb: FormBuilder,private _entrepriseService:EntreprisesService,private _orgaService:OrganizationsService){
+  organizations!:Organizations[];
+  data:any;
+  //entrepriseId!:number;
+  constructor(private modalService:BsModalService,private _fb: FormBuilder,private _entrepriseService:EntreprisesService,private _orgaService:OrganizationsService,private router:Router,private http:HttpClient){
     //this.user=user;
     this.entrepriseForm = this._fb.group({
+      id:'',
       name:'',
       owner:'',
+    });
+    this._orgaService.getOrganizations().subscribe((data: any[])=>{
+      this.organizations=data;
     });
   }
   ngOnInit(): void {
     this._entrepriseService.getEntreprises().subscribe((data: Entreprises[])=>{
       this.entreprises=data;
       });
-    }
+      
+  }
 goToCreate(){
  console.log("est")
 }
 create(){
   if (this.entrepriseForm.valid){
+    console.log(this.entrepriseForm.value);
+    
+    if(this.entrepriseForm.value.id){
+      console.log("modif",this.entrepriseForm.value.id);
+      console.log("tab",this.entrepriseForm.value);
+      this.data=this.entrepriseForm.value;
+      
+      this.openEditForm(this.data,this.template);
+    }else{
+    
+      console.log("ajout",this.entrepriseForm.value.id);
+      
     this._entrepriseService.addEntreprise(this.entrepriseForm.value).subscribe({
       next: () => {
         console.log(this.entrepriseForm.value);
@@ -42,19 +64,33 @@ create(){
         console.error(err);
       },
     });
-// }
-this.close();
 }
+
+}
+}
+open(){
+  this.modalService.show(OrgaListComponent);
 }
 openModal(template: TemplateRef<any>){
-  this.modalRef = this.modalService.show(template);  
+  this.entrepriseForm = this._fb.group({
+    id:'',
+    name:'',
+    owner:'',
+  });
+    this.modalRef = this.modalService.show(template);  
+  
 }
-openEditForm(data:any,template: TemplateRef<any>){
+openEditForm(data:Entreprises,template: TemplateRef<any>){
   this.modalRef = this.modalService.show(template);
-  this.entrepriseForm.patchValue(data);this._entrepriseService.updateEntreprise(this.entrepriseForm.value.id).subscribe({
+  this.entrepriseForm.patchValue(data);  
+  this._entrepriseService.updateEntreprise(data).subscribe({
         next: () => {
           console.log("updating");
-      }
+      },
+      error: (err: any) => {
+        console.log("err");
+        
+        }
     })   
 }
 
@@ -66,12 +102,29 @@ deleteEntreprise(id:number){
       }
       })
     }
-
+this.refreshList();
 }
 close(): void {
   this.modalRef?.hide();
   }
-  showOrganizations(){
-    this._entrepriseService.getOrganizationsbyEntreprise();
+  
+  refreshList(){
+    this._entrepriseService.getEntreprises().subscribe((data: Entreprises[])=>{
+      this.entreprises=data;
+      });
+  }
+  redirectToOrganizations(entreprise_id: number) {
+    this.router.navigate(['organizations', entreprise_id]);
+  }
+  addDefaultUser() {
+    const user = { email: 'user@test.com',password:'1234' }; 
+    this.http.post('http://localhost:3000/users', user).subscribe({
+      next: () => {
+        console.log("User ajouté");
+        },
+        error: (err: any) => {
+          console.log("err");
+          }
+    })
   }
 }

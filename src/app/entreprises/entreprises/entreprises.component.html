@@ -1,12 +1,12 @@
 <div class="col-lg-7">
     <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModal(template)">Add</button>
   </div>
-  
+   
   <div class="card">
       <div class="card-body">
           <!-- title -->
                   <h4 class="card-title">List</h4>
-              
+                  
           <!-- title -->
           <div class="table-responsive">
               <table class="table align-middle">
@@ -35,18 +35,20 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
+                        <td >
                             <div class="d-flex align-items-center">
                                 <div class="ms-3">
                                     <button type="button" class="btn btn-warning"(click)="openEditForm(ts,template)">Modifier</button>
                                     <button type="button" class="btn btn-danger" (click)="deleteEntreprise(ts.id)">Supprimer</button>
-                                    <button type="button" class="btn btn-dark" (click)="showOrganizations()">Organisations</button>
+                                    <button type="button" class="btn btn-dark" (click)="open()">Organisations</button>
+                                    <!-- <button *ngFor="let organization of organizations" type="button" class="btn btn-dark" (click)="redirectToOrganizations(organization.entreprise_id)">Organisations</button>  -->
                                 </div>
                             </div>
                         </td>
+                       
                         
-                        
-                    </tr>              
+                    </tr>     
+                         
                 </tbody>
               </table>
           </div>
@@ -70,9 +72,9 @@
           
         </div>
         
-       <!--  
-        <button type="submit" class="btn btn-primary" >{{this.userForm.value ? 'Update': 'Save'}}</button> -->
-        <button type="submit" class="btn btn-dark btn-pill" >Ajouter</button>
+       
+        <button type="submit" class="btn btn-primary" >{{this.entrepriseForm.value.id ? 'Modifier': 'Ajouter'}}</button>
+        <!-- <button type="submit" class="btn btn-dark btn-pill" >Ajouter</button> -->
         <button type="button" class="btn btn-dark btn-pill" (click)="close()">Annuler</button>
       </form>
       </div>

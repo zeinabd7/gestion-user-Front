@@ -1,26 +1,29 @@
 {
   "users": [
     {
+      "id": 8,
       "name": "TEST123",
       "username": "test123",
       "password": "test",
       "role": "user",
-      "id": 8
+      "entreprise_id": "1"
     },
     {
+      "id": 9,
       "name": "admin",
       "username": "admin",
       "password": "admin",
       "role": "admin",
-      "id": 9
+      "entreprise_id": "1"
     },
     {
-      "name": "TEST123",
-      "username": "test123",
-      "password": "test",
+      "name": "ghv",
+      "username": "dg",
+      "password": "tg",
       "role": "user",
-      "entreprise_id": 1,
-      "id": 11
+      "entreprise_id": "2",
+      "token": "",
+      "id": 10
     }
   ],
   "entreprises": [
@@ -33,17 +36,38 @@
       "name": "Entreprise2",
       "owner": "owner 2",
       "id": 2
+    },
+    {
+      "name": "Entreprise 3",
+      "owner": "Owner 3",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Entre4",
+      "owner": "Owner4"
     }
   ],
   "organizations": [
     {
-      "name": "Organization1",
       "id": 1,
-      "entreprise_id": 1
+      "name": "test",
+      "entreprise_id": null
     },
     {
       "name": "Organisation 2",
-      "id": 2
+      "id": 2,
+      "entreprise_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Organisation 3",
+      "entreprise_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Organisation 4",
+      "entreprise_id": 3
     }
   ]
 }

@@ -1,113 +1,150 @@
 <div class="col-lg-7">
-  <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModalUser(template)">Ajouter Utilisateur</button>
-</div>
-  
-<div class="card">
-  <div class="card-body">
-      <!-- title -->
-              <h4 class="card-title">List</h4>
-      <!-- title -->
-      <div class="table-responsive">
-          <table class="table align-middle">
-              <thead>
-                  <tr>
-                      <th class="text-dark font-medium fs-4">Nom</th>
-                      <th class="text-dark font-medium fs-4">Login</th>
-                      <th class="text-dark font-medium fs-4">Role</th>
-                      <th class="text-dark font-medium fs-4">Entreprise</th>
-                      <th class="text-dark font-medium fs-4">Action</th>
-                      
-                  </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor='let ts of users'>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <h5 class="mb-0 font-medium">{{ts.name}}</h5>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <h5 class="mb-0 font-medium">{{ts.username}}</h5>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <h5 class="mb-0 font-medium">{{ts.role}}</h5>
-                                
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                          <div class="ms-3">
-                              <h5 class="mb-0 font-medium">{{ts.entreprise_id}}</h5>
-                          </div>
-                      </div>
-                  </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <button type="button" class="btn btn-warning"(click)="openEditForm(ts,template)">Modifier</button> 
-                              <button type="button" class="btn btn-danger" (click)="deleteUser(ts.id)">Supprimer</button> 
-                                
-                            </div>
-                        </div>
-                    </td>
-                    
-                    
-                </tr>              
-            </tbody>
-          </table>
-      </div>
+    <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModalUser(template)">Ajouter Utilisateur</button>
   </div>
-  
-</div>
-<ng-template #template>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header pmd-modal-border">
-                <h2 class="modal-title">Inscription</h2>
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="userForm" (ngSubmit)="create()">
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label for="full-name">Nom</label>
-                        <input id="full-name" class="form-control" type="text" formControlName="name">
-                    </div>
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label for="email">Login</label>
-                        <input type="email" class="mat-input form-control" id="email" value="" formControlName="username">
-                    </div>
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label for="mobil">Mot de passe</label>
-                        <input type="password" class="mat-input form-control" id="mobil" value="" formControlName="password">
-                    </div>
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label for="full-name">Role</label>
-                        <select  formControlName="role" class="mat-input form-control">
-                            <option *ngFor="let user of users" [ngValue]="user.role">{{user.role}}</option>
-                          </select>
-                    </div>
-                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label for="full-name">Entreprises</label>
-                        <select  formControlName="entreprise_id" class="mat-input form-control">
-                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn pmd-ripple-effect btn-dark pmd-btn-flat" type="submit">Add</button>
-                <button data-dismiss="modal" class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="button" (click)="close()">Annuler</button>
-            </div>
+    
+  <div class="card">
+    <div class="card-body">
+        <!-- title -->
+                <h4 class="card-title">List</h4>
+        <!-- title -->
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">Nom</th>
+                        <th class="text-dark font-medium fs-4">Login</th>
+                        <th class="text-dark font-medium fs-4">Role</th>
+                        <th class="text-dark font-medium fs-4">Entreprise</th>
+                        <th class="text-dark font-medium fs-4">Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let ts of users'>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <h5 class="mb-0 font-medium">{{ts.name}}</h5>
+                              </div>
+                          </div>
+                      </td>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <h5 class="mb-0 font-medium">{{ts.username}}</h5>
+                              </div>
+                          </div>
+                      </td>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <h5 class="mb-0 font-medium">{{ts.role}}</h5>
+                                  
+                              </div>
+                          </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <h5 class="mb-0 font-medium">{{getEntrepriseName(ts.entreprise_id)}}</h5>
+                            </div>
+                        </div>
+                    </td>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <button type="button" class="btn btn-warning">Modifier</button> 
+                                <button type="button" class="btn btn-danger" (click)="deleteUser(ts.id)">Supprimer</button> 
+                                  
+                              </div>
+                          </div>
+                      </td>
+                      
+                      
+                  </tr>              
+              </tbody>
+            </table>
         </div>
     </div>
-</ng-template>
-
+    
+  </div>
+  <ng-template #template>
+      <div class="row">
+          <div class="mx-auto col-10 col-md-8 col-lg-6">
+      <form [formGroup]="userForm" (ngSubmit)="create()" >
+          <div class="form-row" >
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">Nom</label>
+                  <input  formControlName="name" class="form-control"  placeholder="Nom">
+                </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Login </label>
+              <input type="email" formControlName="username" class="form-control"  placeholder="Proprietaire">
+          </div>
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Password </label>
+              <input type="password" formControlName="password" class="form-control"  placeholder="Proprietaire">
+          </div>
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Role </label>
+              <select  formControlName="role" class="form-control">
+                  <option *ngFor="let user of users" [ngValue]="user.role">{{user.role}}</option>
+                </select>        
+          </div>
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Entreprises </label>
+              <select  formControlName="entreprise_id" class="form-control">
+                  <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
+              </select>
+          </div>
+          </div>  
+          
+          <!-- <button type="submit" class="btn btn-primary" >{{this.userForm.value.id ? 'Modifier': 'Ajouter'}}</button>  -->
+          <button type="submit" class="btn btn-dark btn-pill" >Ajouter</button>
+          <button type="button" class="btn btn-dark btn-pill" (click)="close()">Annuler</button>
+        </form>
+        </div>
+        </div>
+      <!-- <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header pmd-modal-border">
+                  <h2 class="modal-title">Inscription</h2>
+                  <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+              </div>
+              <div class="modal-body">
+                  <form [formGroup]="userForm" (ngSubmit)="create()">
+                      <div class="form-group col-md-6">
+                          <label for="full-name">Nom</label>
+                          <input id="full-name" class="form-control" type="text" formControlName="name">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="email">Login</label>
+                          <input type="email" class="form-control" id="email" value="" formControlName="username">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="mobil">Mot de passe</label>
+                          <input type="password" class=" form-control" id="mobil" value="" formControlName="password">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="full-name">Role</label>
+                          <select  formControlName="role" class="form-control">
+                              <option *ngFor="let user of users" [ngValue]="user.role">{{user.role}}</option>
+                            </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="full-name">Entreprises</label>
+                          <select  formControlName="entreprise_id" class="form-control">
+                              <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
+                          </select>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button data-dismiss="modal" class="btn pmd-ripple-effect btn-dark pmd-btn-flat" type="submit">Add</button>
+                  <button data-dismiss="modal" class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="button" (click)="close()">Annuler</button>
+              </div>
+          </div>
+      </div> -->
+  </ng-template>
+  
+  

@@ -9,10 +9,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 //import { UsersComponent } from './users/users.component';
 import { OrganizationsModule } from './organizations/organizations.module';
-import { UsersModule } from './users/users.module';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { EntreprisesComponent } from './entreprises/entreprises/entreprises.component';
 import { HeaderComponent } from './header/header.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     EntreprisesComponent,
     HeaderComponent,
+    UsersComponent,
     //UsersComponent
   ],
   imports: [
@@ -30,7 +31,6 @@ import { HeaderComponent } from './header/header.component';
     DashboardModule,
     ReactiveFormsModule,
     OrganizationsModule,
-    UsersModule,
     ModalModule.forRoot(),
    
 

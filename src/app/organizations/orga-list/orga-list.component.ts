@@ -1,47 +1,64 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Organizations } from './data';
-import { OrganizationsService } from '../services/organizations.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, TemplateRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Entreprises } from '../entreprises/data';
-import { EntreprisesService } from '../services/entreprises.service';
-import { EditOrgaComponent } from './edit-orga/edit-orga.component';
+import { Entreprises } from 'src/app/entreprises/data';
+import { EntreprisesService } from 'src/app/services/entreprises.service';
+import { OrganizationsService } from 'src/app/services/organizations.service';
+import { Organizations } from '../data';
+import { EditOrgaComponent } from '../edit-orga/edit-orga.component';
+
 @Component({
-  selector: 'app-organizations',
-  templateUrl: './organizations.component.html',
-  styleUrls: ['./organizations.component.css']
+  selector: 'app-orga-list',
+  templateUrl: './orga-list.component.html',
+  styleUrls: ['./orga-list.component.css']
 })
-export class OrganizationsComponent implements OnInit{
+export class OrgaListComponent {
   organizationForm!:FormGroup;
   organizations?:Organizations[];
   modalRef?:BsModalRef;
   template!: TemplateRef<any> ;
   entreprises!:Entreprises[];
-  entreprise_id!:number;
-  orga?:any[];
-  constructor(private router:Router,private orgaService:OrganizationsService,private _fb:FormBuilder,private modalService:BsModalService,private _entrepriseService : EntreprisesService,private route:ActivatedRoute){
+  entreprise_id:any;
+   constructor(private router:Router,private orgaService:OrganizationsService,private _fb:FormBuilder,private modalService:BsModalService,private _entrepriseService : EntreprisesService,private route:ActivatedRoute){
     this.organizationForm = this._fb.group({
       id:[''],
       name: ['', Validators.required],
       entreprise_id:['',Validators.required]
       });
+      this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
+        this.entreprises=data;
+      });
+      
+      // this.entreprise_id =+ this.route.snapshot.paramMap.get('entreprise_id')!;
+      // console.log(this.route.snapshot.paramMap);
       
   }
   ngOnInit(): void {
-      this.orgaService.getOrganizations().subscribe((data: Organizations[])=>{
+      //this.entreprise_id =1;
+        this.orgaService.getOrganizations().subscribe((data: Organizations[])=>{
         this.organizations=data;
+        this.organizations.forEach((org: Organizations) => {
+          this.entreprise_id = org.entreprise_id;
+          
         });
-       //this.showOrganizations(this.entreprise_id);
-        //this.entreprise_id =+ this.route.snapshot.paramMap.get('entreprise_id')!;
-        // this.route.params.subscribe(params => {
-        //   const entrepriseId = params['entreprise_id'];
-        //   this.showOrganizations(entrepriseId);
-        // });
+        this.showOrganizations(this.entreprise_id)
+        }); 
+      
+      
+      
         
       }
-    
-
+      showOrganizations(entreprise_id:number){
+        this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
+          next: (data:any) =>  {
+            this.organizations=data;
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        });
+      }
 create(){
   
   if (this.organizationForm.valid){
@@ -95,16 +112,7 @@ goToAddUsers(){
 adminList(){
   this.router.navigate(['admin-orga']);
 }
-showOrganizations(entreprise_id:number){
-  this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
-    next: (data:any) =>  {
-      this.organizations=data;
-    },
-    error: (err: any) => {
-      console.error(err);
-    },
-  });
-}
+
 close():void{
   this.modalRef?.hide();
 }
@@ -113,5 +121,4 @@ editOrga(orga:Organizations){
   const ref = this.modalService.show(EditOrgaComponent);
 }
 }
-
 

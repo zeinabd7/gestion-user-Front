@@ -12,18 +12,18 @@ import {HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loggedIn!: boolean;
   constructor( private formBuilder: FormBuilder,private router:Router,private _authService:AuthService,private http:HttpClient){}
   loginForm!: FormGroup
+  
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({ 
       username: [''] ,
       password: ['']
     })
 }
-  /* if (this._authService.userValue) { 
-    this.router.navigate(['dashboard/top-cards']);
-} */
-  Login(){
+
+   Login(){
      if(this.loginForm.valid){
 
         const val = this.loginForm.value;
@@ -33,20 +33,27 @@ export class LoginComponent implements OnInit {
             const user = res.find((a:any)=>{
               return a.username === val.username && a.password === val.password ;
             });
+            
             if(user){
-              localStorage.setItem('user',user)
+              localStorage.setItem('user',JSON.stringify(user))
               this._authService.user_connect = user
-            this.router.navigate(['dashboard/top-cards']);
+              this._authService.setLoggedInStatus(true);
+              const token = user.token;
+              console.log("genretarded token",token);
+              localStorage.setItem('token', token);
+              console.log(this._authService.setLoggedInStatus);
+              console.log(user);
+              
+              this.router.navigate(['dashboard/top-cards']);
             }
           }
           
+          
+          
          )
    
-      } 
-  
-    
-    
-  }
+      }  
+  } 
 
   
 }

@@ -16,27 +16,21 @@ export class PermissionsGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      //const user = this.authService.userValue();
-      //if () {
-        /* let u = this.authService.getRole()
-        
-       
-        //window.alert('Access refusé!');
-        this.router.navigate(['users']);
-     // }
-      if (u.role == "user") {
-        console.log('voici le role user',u.role);
+      /*let role = this.authService.getRole()
+      console.log('the role permission===',role)
+      if (role=="admin") {  
+        return true;      
+      }
+      return false;
       }*/
       let role = this.authService.getRole()
-      
       console.log('the role permission===',role);
       let order: boolean
       role == "user"?order = true : order = true
       return order
       
-      
-      
     }
+    
    
   }
   

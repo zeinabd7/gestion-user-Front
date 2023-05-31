@@ -1,105 +1,99 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-//import { Router } from '@angular/router';
-import { Users } from './data';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { EntreprisesService } from '../services/entreprises.service';
-//import { UsersAddComponent } from './users-add/users-add.component';
-
+import { UserService } from '../services/user.service';
+import { Users } from './data';
+import { Entreprises } from '../entreprises/data';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
-  userForm!:FormGroup;
-  modalRef?:BsModalRef;
-  template!: TemplateRef<any> ;
-  users?: Users[];
-  userList:any;
-  entreprises!:any[];
-  //id!:any
-    constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService){
-    this.userForm = this._fb.group({
-            name: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', Validators.required],
-            role: ['', [Validators.required] ],
-            //entreprise_name: ['', [Validators.required] ],
-            entreprise_id: ['', [Validators.required] ],
+export class UsersComponent implements OnInit{
+userForm!:FormGroup;
+users?:Users[];
+modalRef?:BsModalRef;
+entreprises!:any;
+entre!:Entreprises[];
+entrepriseId!:any;
+constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService){
+this.userForm=this._fb.group({
+  name:'',
+  username:'',
+  password:'',
+  role:'',
+  entreprise_id:'',
+  token:''
+});
 
-    });
-    this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
-      this.entreprises=data;
-    });
-  }
-  ngOnInit(): void {
-     this._userService.getUsersList().subscribe(
-      (users: Users[]) => this.users = users
-      ); 
-  }
+this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
+  this.entreprises=data;
+});
+}
+ngOnInit(): void {
+    this._userService.getUsersList().subscribe((data:Users[])=>{
+      this.users=data;
+});
+this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
+  this.entre=data;
+  this.entrepriseId=this.entre;
+});
+
+}
+// getEntrepriseName(entrepriseId: number) {
+//   this._entrepriseService.getEntreprises().subscribe(
+//     res=>{
+//       const entreprise=res.find((e:any)=>{
+//         return e.id===entrepriseId;
+//       })
+//     });
+//   }
+getEntrepriseName(entrepriseId?: number): string {
   
-  create(){
-    if (this.userForm.valid){
-      /* if (this.userForm.value) {
-        this._userService.updateUser(this.userForm.value.id,this.userForm.value).subscribe({
-          next: () => {
-            console.log("updating");
-            this.refreshList();
-            
+  if(entrepriseId){
+    const entreprise = this.entre.find(e => e.id === entrepriseId);
+    return entreprise ? entreprise.name : 'Erreur';
+       
+  }
+  return '';
+}
+create(){
+  if (this.userForm.valid) {
+    this._userService.addUser(this.userForm.value).subscribe({
+      next: () => {
+        console.log(this.userForm.value);
+        console.log(this.userForm.value.i);
+        
+      },
+      error: (error) => {
+        console.log(error);
         }
-      })
-      }
-       else {   */
-      this._userService.addUser(this.userForm.value).subscribe({
-        next: () => {
-          console.log(this.userForm.value);
-          this.close();
-          this.refreshList();
-        },
-        error: (err: any) => {
-          console.error(err);
-
-        },
-      });
-  //}
+    })
+  } else {
+    alert('Formulaire non valdie')
   }
-  }
-  openModal(template: TemplateRef<any>){
-    //this.router.navigate(['users/users-add']);
-    //this.modal.openModalUser(template);
-  }
-  close(): void {
+}
+openModalUser(template:TemplateRef<any>){
+this.modalRef=this.modalService.show(template)
+}
+close():void{
   this.modalRef?.hide();
-  }
-  openModalUser(template: TemplateRef<any>){
-    //this.router.navigate(['users/users-add']);
-    this.modalRef = this.modalService.show(template);  
-    
-  }
-  openEditForm(data:any,template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
-    //this.openModalUser(this.template);
-    this.userForm.patchValue(data);this._userService.updateUser(this.userForm.value.id,this.userForm.value).subscribe({
-          next: () => {
-            console.log("updating");
-        }
-      })   
-  }
-  deleteUser(id:any){
-    console.log(id);
-    if (confirm('Voulez-vous supprimer?')) {
-      this._userService.deleteUser(id).subscribe({
-        next: () => {
-          this.refreshList();
-          console.log("ok")
-        },
-        error: console.log,
-      });
-    }
 }
-refreshList() {
-  this._userService.getUsersList().subscribe(res => this.userList = res);
+openEditForm(){
+
 }
+deleteUser(id:any){
+  if(confirm('Voulez-vous spprimer?')){
+    this._userService.deleteUser(id).subscribe({
+      next: () => {
+        window.location.reload()
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+}
+
 }

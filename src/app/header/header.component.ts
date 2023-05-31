@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  userIsAuthenticated: boolean=false;
+  isLoggedIn$!:Observable<boolean>;
   constructor(private router : Router,private _authService:AuthService) {}
   ngOnInit() {
-    this._authService.isLoggedIn.subscribe((status) => {
-      this.userIsAuthenticated = status;
+    //this.isLoggedIn$ = this._authService.isLoggedIn();
+    this.isLoggedIn$ = this._authService.isLoggedIn();
+    
+    this.isLoggedIn$.subscribe(loggedIn => {
+      console.log(loggedIn);
     });
   }
   goToHome(){
@@ -21,8 +25,7 @@ export class HeaderComponent {
     this.router.navigate(['login']);
   }
   onLogout(){
-    this._authService.logoutUser();
-    this.router.navigate(['login']);  
+    this._authService.logout(); 
   }
   goToOrga(){
     this.router.navigate(['organizations']);

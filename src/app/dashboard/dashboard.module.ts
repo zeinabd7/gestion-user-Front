@@ -10,7 +10,6 @@ import { TopSellingComponent } from "./dashboard-components/top-selling/top-sell
 import { TopCardsComponent } from "./dashboard-components/top-cards/top-cards.component";
 import { BlogCardsComponent } from "./dashboard-components/blog-cards/blog-cards.component";
 import { OrganizationsComponent } from "../organizations/organizations.component";
-import { UsersModule } from "../users/users.module";
 import { AuthGuard } from "../guards/auth.guard";
 import { UsersComponent } from "../users/users.component";
 //import { OrganizationsModule } from "../organizations/organizations.module";
@@ -25,7 +24,7 @@ const routes: Routes = [
     },
     component: DashboardComponent, */
     path:'dashboard',
-    component: DashboardComponent,canActivate:[AuthGuard],
+    component: DashboardComponent,
     children:[
     { path: 'top-selling', component:TopSellingComponent },
     { path: 'feeds', component:FeedsComponent },

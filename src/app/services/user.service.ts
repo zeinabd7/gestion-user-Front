@@ -19,9 +19,9 @@ export class UserService {
   getToken(donnees:any){
     return this.http.post('http://localhost:3000/login',donnees)
   }
-  /* addUser(data: any): Observable<any> {
+   addUser(data: any): Observable<any> {
     return this.http.post('http://localhost:3000/users', data);
-  } */
+  } 
   getUsersList(): Observable<any> {
     return this.http.get<Users[]>(`http://localhost:3000/users`);
   }
@@ -31,17 +31,7 @@ export class UserService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`http://localhost:3000/users/${id}`);
   }
-  get Refreshrequired() {
-    return this._refreshrequired;
-  }
-  addUser(inputdata: any) {
-    return this.http.post('http://localhost:3000/users', inputdata).pipe(
-      tap(() => {
-        this.Refreshrequired.next();
-
-      })
-    );
-  }
+  
   openModalUser(template: TemplateRef<any>){
     //this.router.navigate(['users/users-add']);
     this.modalRef = this.modalService.show(template);  
