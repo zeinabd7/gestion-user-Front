@@ -25,15 +25,19 @@ export class AuthService {
    
    }
    isLoggedIn():Observable<boolean>{
+    
     return this.loggedIn.asObservable();
-    }
+    
+   }
+    //return this.loggedIn.asObservable();
+  
     setLoggedInStatus(loggedIn: boolean): void {
       this.loggedInn=loggedIn;
       this.loggedIn.next(loggedIn);
     }
     public  userValue()  {
-      let user: String =  localStorage.getItem('user')!
-      console.log('===uservqlue', localStorage.getItem('user'));
+      //let user: String =  localStorage.getItem('user')!
+      //console.log('===uservqlue', localStorage.getItem('user'));
       
       return this.userSubject;
       }
@@ -66,12 +70,13 @@ export class AuthService {
   
     public logout(){
       this.loggedIn.next(false);
-      localStorage.removeItem('user');
+      //localStorage.removeItem('user');
+      localStorage.removeItem('token'); 
       this.router.navigate(['login']);
       }
     public getRole(){
       let user = this.user_connect.role
-      console.log('users===',user);
+      //console.log('users===',user);
       
       return user
       //return this.user;

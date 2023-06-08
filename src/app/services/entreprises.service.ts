@@ -9,6 +9,8 @@ import { Organizations } from '../organizations/data';
 export class EntreprisesService {
   entreprises!:Entreprises[];
   organizations!:Organizations[];
+  private entrepriseId: any;
+
   constructor(private http:HttpClient) { 
     this.entreprises=this.entreprises;
   }
@@ -30,8 +32,13 @@ export class EntreprisesService {
   deleteEntreprise(id:number):Observable<Entreprises>{
     return this.http.delete<Entreprises>('http://localhost:3000/entreprises/'+id);
     }
-    getOrganizationsbyEntreprise(){
-     }
+    setEntrepriseId(id: any): void {
+      this.entrepriseId = id;
+    }
+  
+    getEntrepriseId(): any {
+      return this.entrepriseId;
+    }
     }
 
 

@@ -8,4 +8,10 @@ export interface Users{
     entreprise_id?:number;
     entreprise_name?:string;
     token?:string;
+    group:Group[],
+}
+export interface Group{
+    id:number;
+    name:string;
+    droits:string[];
 }

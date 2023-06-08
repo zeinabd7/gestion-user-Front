@@ -11,12 +11,13 @@ export class HeaderComponent {
   isLoggedIn$!:Observable<boolean>;
   constructor(private router : Router,private _authService:AuthService) {}
   ngOnInit() {
-    //this.isLoggedIn$ = this._authService.isLoggedIn();
     this.isLoggedIn$ = this._authService.isLoggedIn();
-    
     this.isLoggedIn$.subscribe(loggedIn => {
       console.log(loggedIn);
     });
+  }
+  isUser():boolean{
+    return this._authService.getRole()==='user';
   }
   goToHome(){
     this.router.navigate(['dashboard/top-cards']);

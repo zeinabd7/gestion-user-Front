@@ -1,7 +1,6 @@
 .modal-dialog{
     width: 1200px;
-    display: flex;
-}
-.modal-header{
-    width: 1200px;
+    position: absolute;
+   height: 200px;
+    
 }

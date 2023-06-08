@@ -96,14 +96,14 @@ adminList(){
   this.router.navigate(['admin-orga']);
 }
 showOrganizations(entreprise_id:number){
-  this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
-    next: (data:any) =>  {
-      this.organizations=data;
-    },
-    error: (err: any) => {
-      console.error(err);
-    },
-  });
+  // this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
+  //   next: (data:any) =>  {
+  //     this.organizations=data;
+  //   },
+  //   error: (err: any) => {
+  //     console.error(err);
+  //   },
+  // });
 }
 close():void{
   this.modalRef?.hide();

@@ -13,7 +13,8 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import { EntreprisesComponent } from './entreprises/entreprises/entreprises.component';
 import { HeaderComponent } from './header/header.component';
 import { UsersComponent } from './users/users.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,9 @@ import { UsersComponent } from './users/users.component';
     ReactiveFormsModule,
     OrganizationsModule,
     ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule
+
    
 
 

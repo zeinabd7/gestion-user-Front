@@ -6,15 +6,19 @@
       "username": "test123",
       "password": "test",
       "role": "user",
-      "entreprise_id": "1"
+      "entreprise_id": "1",
+      "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
+      "group": "user"
     },
     {
       "id": 9,
       "name": "admin",
       "username": "admin",
       "password": "admin",
-      "role": "admin",
-      "entreprise_id": "1"
+      "role": "superadmin",
+      "entreprise_id": "1",
+      "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
+      "group": "admin"
     },
     {
       "name": "ghv",
@@ -22,15 +26,42 @@
       "password": "tg",
       "role": "user",
       "entreprise_id": "2",
-      "token": "",
+      "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
       "id": 10
+    },
+    {
+      "name": "user2",
+      "username": "user2",
+      "password": "test",
+      "role": "admin",
+      "entreprise_id": 4,
+      "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
+      "id": 11
+    },
+    {
+      "name": "gfd",
+      "username": "jgf",
+      "password": "",
+      "role": "",
+      "entreprise_id": "",
+      "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
+      "group": [
+        {
+          "id": 2,
+          "name": "user",
+          "droits": [
+            "r"
+          ]
+        }
+      ],
+      "id": 12
     }
   ],
   "entreprises": [
     {
+      "id": 1,
       "name": "Entreprise1",
-      "owner": "Owner1",
-      "id": 1
+      "owner": "Owner1"
     },
     {
       "name": "Entreprise2",
@@ -46,6 +77,11 @@
       "id": 4,
       "name": "Entre4",
       "owner": "Owner4"
+    },
+    {
+      "id": 5,
+      "name": "",
+      "owner": ""
     }
   ],
   "organizations": [

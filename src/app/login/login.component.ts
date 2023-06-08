@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
               console.log("genretarded token",token);
               localStorage.setItem('token', token);
               console.log(this._authService.setLoggedInStatus);
-              console.log(user);
+              //console.log(user);
               
               this.router.navigate(['dashboard/top-cards']);
             }

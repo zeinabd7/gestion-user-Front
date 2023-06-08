@@ -11,29 +11,29 @@ export class AuthGuard implements CanActivate {
         private authService: AuthService
     ) { }
 
-    // canActivate( next: ActivatedRouteSnapshot,state: RouterStateSnapshot
-    //   ): Observable<boolean> {
-    //     return this.authService.isLoggedIn()      
-    //       .pipe(
-    //         take(1),                            
-    //         map((isLoggedIn: boolean) => {      
-    //           if (!isLoggedIn){
-    //             this.router.navigate(['/login']);  
-    //             return false;
-    //           }
-    //           return true;
-    //         })
-    //       )
-    //   }
-    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-      let role=this.authService.getRole()
-      if (role==="user") {
-        alert("Vous ne pouvez pas acceder à cette page")
-       // this.router.navigate(['/login'])
-      } else {
-        console.log("okkk");
-        
+    canActivate( next: ActivatedRouteSnapshot,state: RouterStateSnapshot
+      ): Observable<boolean> {
+        return this.authService.isLoggedIn()      
+          .pipe(
+            take(1),                            
+            map((isLoggedIn: boolean) => {      
+              if (!isLoggedIn){
+                this.router.navigate(['/login']);  
+                return false;
+              }
+              return true;
+            })
+          )
       }
-      return true;
-    }
+    // canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
+    //   let role=this.authService.getRole()
+    //   if (role==="user") {
+    //     alert("Vous ne pouvez pas acceder à cette page")
+    //    this.router.navigate(['dashboard/top-cards'])
+    //   } else {
+    //     console.log("okkk");
+        
+    //   }
+    //   return true;
+    // }
 }

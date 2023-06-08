@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   {path:'dashboard',loadChildren:() => DashboardModule},
   { path: 'login', component: LoginComponent},
   {path:'organization',loadChildren:() => OrganizationsModule},
-  {path:'entreprises',component:EntreprisesComponent},
+  {path:'entreprises',component:EntreprisesComponent,canActivate:[AuthGuard]},
   { path: 'users', component: UsersComponent},
   {path:'admin-orga',component:AdminOrgaComponent}
   //{ path: '**', redirectTo: '' }

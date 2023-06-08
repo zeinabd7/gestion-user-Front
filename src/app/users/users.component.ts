@@ -5,6 +5,9 @@ import { EntreprisesService } from '../services/entreprises.service';
 import { UserService } from '../services/user.service';
 import { Users } from './data';
 import { Entreprises } from '../entreprises/data';
+import { Group } from './data';
+import { TokenService } from '../services/token.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,73 +18,124 @@ userForm!:FormGroup;
 users?:Users[];
 modalRef?:BsModalRef;
 entreprises!:any;
+template!: TemplateRef<any> ;
 entre!:Entreprises[];
 entrepriseId!:any;
-constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService){
+data:any;
+entreprise!:any;
+group!:Group[];
+constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService,private tokenService: TokenService,private auth:AuthService){
 this.userForm=this._fb.group({
+  id:'',
   name:'',
   username:'',
   password:'',
   role:'',
   entreprise_id:'',
-  token:''
+  token:'',
+  group:''
 });
-
-this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
-  this.entreprises=data;
-});
+   this.group=[{
+  id:1,name:"admin",droits:["r","w","x"]},
+  {id:2,name:"user",droits:["r"]}
+]
+// this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
+//   this.entreprises=data;
+// });
 }
 ngOnInit(): void {
+  // if(this.auth.getRole()==='superadmin'){
+  //   this._userService.getUsersList().subscribe((data:Users[])=>{
+  //     this.users=data;
+  //   });
+  // } else if(this.auth.getRole()==='admin'){
+  //   this._userService.getUsersListbyId(9).subscribe((data:Users[])=>{
+  //     this.users=data;
+  //   });
+  // }
+  
     this._userService.getUsersList().subscribe((data:Users[])=>{
       this.users=data;
-});
+    });
 this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
   this.entre=data;
-  this.entrepriseId=this.entre;
+  //this.entrepriseId=this.entre;
 });
 
 }
-// getEntrepriseName(entrepriseId: number) {
-//   this._entrepriseService.getEntreprises().subscribe(
-//     res=>{
-//       const entreprise=res.find((e:any)=>{
-//         return e.id===entrepriseId;
-//       })
-//     });
-//   }
+
 getEntrepriseName(entrepriseId?: number): string {
   
   if(entrepriseId){
-    const entreprise = this.entre.find(e => e.id === entrepriseId);
-    return entreprise ? entreprise.name : 'Erreur';
+    this.entre.find((e)=>{
+      if(e.id===entrepriseId){
+        console.log(e);
+        }
+        });
+     
+    //const entreprise = this.entre.find(e => e.id === entrepriseId);
+    return this.entreprise ? this.entreprise.name : 'Erreur';
        
   }
   return '';
 }
 create(){
-  if (this.userForm.valid) {
-    this._userService.addUser(this.userForm.value).subscribe({
+  if (this.userForm.valid){
+    console.log(this.userForm.valid);
+    
+    if(this.userForm.value.id){
+      
+      this.data=this.userForm.value;
+      
+      this.openEditForm(this.data,this.template);
+    }else{
+      const selectedGroupName = this.userForm.value.group;
+      const selectedGroup = this.group.find(group => group.name === selectedGroupName);
+  
+      if (selectedGroup) {
+        const user = {
+          ...this.userForm.value,
+          group: [selectedGroup]
+        };
+      
+    this._userService.addUser(user).subscribe({
       next: () => {
         console.log(this.userForm.value);
-        console.log(this.userForm.value.i);
-        
       },
-      error: (error) => {
-        console.log(error);
-        }
-    })
-  } else {
-    alert('Formulaire non valdie')
-  }
+      error: (err: any) => {
+        console.error(err);
+      },
+    });
+    }
 }
+}}
 openModalUser(template:TemplateRef<any>){
+  this.userForm=this._fb.group({
+    name:'',
+    username:'',
+    password:'',
+    role:'',
+    entreprise_id:'',
+    token:'',
+    group:''
+  });
 this.modalRef=this.modalService.show(template)
 }
 close():void{
   this.modalRef?.hide();
 }
-openEditForm(){
-
+openEditForm(data:Users,template: TemplateRef<any>){
+  this.modalRef = this.modalService.show(template);
+  this.userForm.patchValue(data);
+  
+  this._userService.updateUser(data).subscribe({
+        next: () => {
+          console.log("updating");
+          console.log("id user==",this.userForm.value.id);
+          //window.location.reload();
+          
+      }
+    }) 
 }
 deleteUser(id:any){
   if(confirm('Voulez-vous spprimer?')){

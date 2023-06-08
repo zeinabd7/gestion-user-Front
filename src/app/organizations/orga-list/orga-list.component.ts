@@ -20,6 +20,7 @@ export class OrgaListComponent {
   template!: TemplateRef<any> ;
   entreprises!:Entreprises[];
   entreprise_id:any;
+  data!:any;
    constructor(private router:Router,private orgaService:OrganizationsService,private _fb:FormBuilder,private modalService:BsModalService,private _entrepriseService : EntreprisesService,private route:ActivatedRoute){
     this.organizationForm = this._fb.group({
       id:[''],
@@ -36,17 +37,8 @@ export class OrgaListComponent {
   }
   ngOnInit(): void {
       //this.entreprise_id =1;
-        this.orgaService.getOrganizations().subscribe((data: Organizations[])=>{
-        this.organizations=data;
-        this.organizations.forEach((org: Organizations) => {
-          this.entreprise_id = org.entreprise_id;
-          
-        });
-        this.showOrganizations(this.entreprise_id)
-        }); 
-      
-      
-      
+    this.entreprise_id = this._entrepriseService.getEntrepriseId()
+    this.showOrganizations(this.entreprise_id)
         
       }
       showOrganizations(entreprise_id:number){
@@ -58,15 +50,17 @@ export class OrgaListComponent {
             console.error(err);
           },
         });
+
       }
 create(){
   
   if (this.organizationForm.valid){
-    // if(this.organizationForm.value){
-    //   this.openEditForm
-    //   console.log(this.organizationForm.value);
+    // if(this.organizationForm.value.id){
+    // this.data=this.organizationForm.value;
+    //  this.openEditForm(this.data,this.template)
+    //  console.log(this.organizationForm.value);
       
-    // }
+    // }else{
     this.orgaService.addOrganization(this.organizationForm.value).subscribe({
       next: () => {
         console.log(this.organizationForm.value);
@@ -76,7 +70,8 @@ create(){
         console.error(err);
       },
     });
-}
+//}
+  }
 }
 openEditForm(data:any,template: TemplateRef<any>){
   this.modalRef = this.modalService.show(template);
@@ -106,9 +101,7 @@ openModal(template: TemplateRef<any>){
   this.modalRef = this.modalService.show(template);  
   
 }
-goToAddUsers(){
- //this.orgaService.openModal();
-}
+
 adminList(){
   this.router.navigate(['admin-orga']);
 }
