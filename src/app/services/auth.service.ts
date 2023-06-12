@@ -13,7 +13,7 @@ export class AuthService {
   user_connect!: Users
   private loggedIn = new BehaviorSubject<boolean>(false);
   private userSubject: any;
-  private loggedInn: boolean = false;
+  //private loggedInn: boolean = false;
   // public user: Observable<Users>;
   public user: any;
   //public use?:Users[];
@@ -22,18 +22,19 @@ export class AuthService {
     this.userSubject = localStorage.getItem('user')!;
     // this.user = this.userSubject.asObservable();
     this.user = this.userSubject
-   
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    this.loggedIn.next(isLoggedIn === 'true');
    }
    isLoggedIn():Observable<boolean>{
     
     return this.loggedIn.asObservable();
     
    }
-    //return this.loggedIn.asObservable();
   
     setLoggedInStatus(loggedIn: boolean): void {
-      this.loggedInn=loggedIn;
+      //this.loggedInn=loggedIn;
       this.loggedIn.next(loggedIn);
+      localStorage.setItem('isLoggedIn', loggedIn.toString());
     }
     public  userValue()  {
       //let user: String =  localStorage.getItem('user')!
@@ -68,11 +69,13 @@ export class AuthService {
             })); 
     } */
   
-    public logout(){
-      this.loggedIn.next(false);
-      //localStorage.removeItem('user');
-      localStorage.removeItem('token'); 
-      this.router.navigate(['login']);
+     public logout():void{
+      // this.loggedIn.next(false); 
+      // localStorage.removeItem('isLoggedIn');
+      // this.router.navigate(['login']);
+      this.setLoggedInStatus(false);
+    localStorage.removeItem('isLoggedIn');
+    this.router.navigate(['login']);
       }
     public getRole(){
       let user = this.user_connect.role
@@ -80,6 +83,10 @@ export class AuthService {
       
       return user
       //return this.user;
+    }
+    public getGroup(): string {
+      const groupName: string = this.user_connect.group[0].name;
+      return groupName;
     }
 
 

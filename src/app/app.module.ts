@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { UsersComponent } from './users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UserheaderComponent } from './userheader/userheader.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
     EntreprisesComponent,
     HeaderComponent,
     UsersComponent,
+    UserheaderComponent,
     //UsersComponent
   ],
   imports: [

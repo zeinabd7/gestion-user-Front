@@ -36,19 +36,20 @@ this.userForm=this._fb.group({
   group:''
 });
    this.group=[{
-  id:1,name:"admin",droits:["r","w","x"]},
-  {id:2,name:"user",droits:["r"]}
+  id:1,name:"superadmin",droits:["r","w","x"]},
+  {id:2,name:"user",droits:["r"]},
+  {id:3,name:"admin",droits:["r","w"]}
 ]
 // this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
 //   this.entreprises=data;
 // });
 }
 ngOnInit(): void {
-  // if(this.auth.getRole()==='superadmin'){
+  // if(this.auth.getGroup()==='superadmin'){
   //   this._userService.getUsersList().subscribe((data:Users[])=>{
   //     this.users=data;
   //   });
-  // } else if(this.auth.getRole()==='admin'){
+  // } else if(this.auth.getGroup()==='admin'){
   //   this._userService.getUsersListbyId(9).subscribe((data:Users[])=>{
   //     this.users=data;
   //   });
@@ -101,6 +102,7 @@ create(){
     this._userService.addUser(user).subscribe({
       next: () => {
         console.log(this.userForm.value);
+        localStorage.setItem('token', user.token);
       },
       error: (err: any) => {
         console.error(err);
@@ -134,6 +136,9 @@ openEditForm(data:Users,template: TemplateRef<any>){
           console.log("id user==",this.userForm.value.id);
           //window.location.reload();
           
+      },
+      error:(err:any)=>{
+        console.log(err);
       }
     }) 
 }

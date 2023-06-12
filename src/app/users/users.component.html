@@ -14,7 +14,7 @@
                     <tr>
                         <th class="text-dark font-medium fs-4">Nom</th>
                         <th class="text-dark font-medium fs-4">Login</th>
-                        <th class="text-dark font-medium fs-4">Role</th>
+                        <th class="text-dark font-medium fs-4">Groupe</th>
                         <th class="text-dark font-medium fs-4">Entreprise</th>
                         <th class="text-dark font-medium fs-4">Action</th>
                         
@@ -36,10 +36,10 @@
                               </div>
                           </div>
                       </td>
-                      <td>
+                      <td >
                           <div class="d-flex align-items-center">
-                              <div class="ms-3">
-                                  <h5 class="mb-0 font-medium">{{ts.role}}</h5>
+                              <div class="ms-3" *ngFor="let gr of ts.group">
+                                  <h5 class="mb-0 font-medium">{{gr.name}}</h5>
                                   
                               </div>
                           </div>
@@ -108,7 +108,7 @@
                 <label for="lastName" class="col-form-label col-sm-2 text-right">Groupe</label>
                 <div class="col-sm-5">
                     <select  formControlName="group" class="form-control">
-                            <option *ngFor="let user of users" [value]="user.group">{{ user.group }}</option>
+                            <option *ngFor="let gr of group" [value]="gr.name">{{ gr.name }}</option>
                       </select>                  
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 <label for="lastName" class="col-form-label col-sm-2 text-right">Entreprise</label>
                 <div class="col-sm-5">
                         <select  formControlName="entreprise_id" class="form-control">
-                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
+                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.id}}</option>
                         </select>                           
                 </div>
             </div>

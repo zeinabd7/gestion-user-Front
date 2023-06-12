@@ -8,7 +8,15 @@
       "role": "user",
       "entreprise_id": "1",
       "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
-      "group": "user"
+      "group": [
+        {
+          "id": 2,
+          "name": "user",
+          "droits": [
+            "r"
+          ]
+        }
+      ]
     },
     {
       "id": 9,
@@ -18,7 +26,17 @@
       "role": "superadmin",
       "entreprise_id": "1",
       "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
-      "group": "admin"
+      "group": [
+        {
+          "id": 1,
+          "name": "superadmin",
+          "droits": [
+            "r",
+            "w",
+            "x"
+          ]
+        }
+      ]
     },
     {
       "name": "ghv",
@@ -39,18 +57,18 @@
       "id": 11
     },
     {
-      "name": "gfd",
-      "username": "jgf",
-      "password": "",
-      "role": "",
+      "name": "garaaf",
+      "username": "gar",
+      "password": "test",
+      "role": "admin",
       "entreprise_id": "",
       "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
       "group": [
         {
-          "id": 2,
-          "name": "user",
+          "id": 3,
+          "name": "admin",
           "droits": [
-            "r"
+            "r","w"
           ]
         }
       ],
@@ -75,13 +93,8 @@
     },
     {
       "id": 4,
-      "name": "Entre4",
+      "name": "Entreprise4",
       "owner": "Owner4"
-    },
-    {
-      "id": 5,
-      "name": "",
-      "owner": ""
     }
   ],
   "organizations": [

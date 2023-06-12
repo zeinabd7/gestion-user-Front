@@ -39,10 +39,12 @@ export class LoginComponent implements OnInit {
               this._authService.user_connect = user
               this._authService.setLoggedInStatus(true);
               const token = user.token;
+              localStorage.setItem('token',token)
+
               console.log("genretarded token",token);
-              localStorage.setItem('token', token);
+             //localStorage.setItem('token', token);
+             localStorage.getItem('token')
               console.log(this._authService.setLoggedInStatus);
-              //console.log(user);
               
               this.router.navigate(['dashboard/top-cards']);
             }
