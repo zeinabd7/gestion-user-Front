@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EntreprisesService } from '../services/entreprises.service';
 import { UserService } from '../services/user.service';
-import { Users } from './data';
+import {  Users } from './data';
 import { Entreprises } from '../entreprises/data';
-import { Group } from './data';
 import { TokenService } from '../services/token.service';
 import { AuthService } from '../services/auth.service';
+import {Groups} from '../groups/data'
+import { GroupsService } from '../services/groups.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -17,14 +18,15 @@ export class UsersComponent implements OnInit{
 userForm!:FormGroup;
 users?:Users[];
 modalRef?:BsModalRef;
-entreprises!:any;
+entreprises!:Entreprises[];
 template!: TemplateRef<any> ;
 entre!:Entreprises[];
 entrepriseId!:any;
 data:any;
 entreprise!:any;
-group!:Group[];
-constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService,private tokenService: TokenService,private auth:AuthService){
+group!:Groups[];
+groups!:Groups[];
+constructor(private modalService:BsModalService,private _fb: FormBuilder,private _userService:UserService,private _entrepriseService : EntreprisesService,private tokenService: TokenService,private auth:AuthService,private groupService:GroupsService){
 this.userForm=this._fb.group({
   id:'',
   name:'',
@@ -33,13 +35,13 @@ this.userForm=this._fb.group({
   role:'',
   entreprise_id:'',
   token:'',
-  group:''
+  groupe:''
 });
-   this.group=[{
-  id:1,name:"superadmin",droits:["r","w","x"]},
-  {id:2,name:"user",droits:["r"]},
-  {id:3,name:"admin",droits:["r","w"]}
-]
+//    this.group=[{
+//   id:1,name:"superadmin",droits:["r","w","x"]},
+//   {id:2,name:"user",droits:["r"]},
+//   {id:3,name:"admin",droits:["r","w"]}
+// ]
 // this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
 //   this.entreprises=data;
 // });
@@ -54,12 +56,14 @@ ngOnInit(): void {
   //     this.users=data;
   //   });
   // }
-  
+  this.groupService.getGroups().subscribe((data:Groups[])=>{
+    this.groups=data;
+  });
     this._userService.getUsersList().subscribe((data:Users[])=>{
       this.users=data;
     });
-this._entrepriseService.getEntreprises().subscribe((data: any[])=>{
-  this.entre=data;
+this._entrepriseService.getEntreprises().subscribe((data: Entreprises[])=>{
+  this.entreprises=data;
   //this.entrepriseId=this.entre;
 });
 
@@ -91,7 +95,7 @@ create(){
       this.openEditForm(this.data,this.template);
     }else{
       const selectedGroupName = this.userForm.value.group;
-      const selectedGroup = this.group.find(group => group.name === selectedGroupName);
+      const selectedGroup = this.groups.find(group => group.name === selectedGroupName);
   
       if (selectedGroup) {
         const user = {
@@ -111,6 +115,9 @@ create(){
     }
 }
 }}
+openGroup(template1:TemplateRef<any>){
+this.modalRef=this.modalService.show(template1)
+}
 openModalUser(template:TemplateRef<any>){
   this.userForm=this._fb.group({
     name:'',
@@ -119,7 +126,7 @@ openModalUser(template:TemplateRef<any>){
     role:'',
     entreprise_id:'',
     token:'',
-    group:''
+    groupe:''
   });
 this.modalRef=this.modalService.show(template)
 }

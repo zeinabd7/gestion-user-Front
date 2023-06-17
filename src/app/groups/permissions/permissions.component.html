@@ -1,0 +1,82 @@
+<div class="col-lg-7">
+    <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModal(template)">Ajouter Permission</button>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <!-- title -->
+                <h4 class="card-title">Liste des groupes</h4>
+                
+        <!-- title -->
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">Id</th>
+                        <th class="text-dark font-medium fs-4">Nom</th>
+                        <th class="text-dark font-medium fs-4">Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let ts of permissions'>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <h5 class="mb-0 font-medium">{{ts.id}}</h5>
+                              </div>
+                          </div>
+                      </td>
+                     
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                <h5 class="mb-0 font-medium">{{ts.name}}</h5>
+
+                              </div>
+                          </div>
+                      </td>
+                      <td >
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <button type="button" class="btn btn-warning mr-2"(click)="openEditForm(ts,template)">Modifier</button>
+                                  <button type="button" class="btn btn-danger mr-2" (click)="deletePermission(ts.id)">Supprimer</button>
+                                  <!-- <button *ngFor="let organization of organizations" type="button" class="btn btn-dark" (click)="redirectToOrganizations(organization.entreprise_id)">Organisations</button>  -->
+                              </div>
+                          </div>
+                      </td>
+                     
+                      
+                  </tr>     
+                       
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+<ng-template #template>
+    <div class="modal-header bg-primary text-white">
+        <h4 class="modal-title" id="modal-basic-title">Group</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="permissionForm" (ngSubmit)="create()" >
+            <div class="form-group row d-flex justify-content-center align-items-center">
+                <label for="firstName" class="col-form-label col-sm-2 text-right">Nom</label>
+                <div class="col-sm-5">
+                    <input type="text" formControlName="name" class="form-control" />
+                    
+                </div>
+            </div>
+            <br>
+            
+            <div class="modal-footer">
+             <button type="submit" class="btn btn-primary" >{{this.permissionForm.value.id ? 'Modifier': 'Ajouter'}}</button>
+
+                <button  class="btn btn-primary mr-2" >Annuler</button>
+            </div>
+    
+        </form>
+    </div>
+   
+     
+    </ng-template>

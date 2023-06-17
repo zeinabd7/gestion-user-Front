@@ -10,11 +10,7 @@
       "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
       "group": [
         {
-          "id": 2,
-          "name": "user",
-          "droits": [
-            "r"
-          ]
+          "name": "user"
         }
       ]
     },
@@ -28,13 +24,7 @@
       "token": "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ",
       "group": [
         {
-          "id": 1,
-          "name": "superadmin",
-          "droits": [
-            "r",
-            "w",
-            "x"
-          ]
+          "name": "superadmin"
         }
       ]
     },
@@ -68,7 +58,8 @@
           "id": 3,
           "name": "admin",
           "droits": [
-            "r","w"
+            "r",
+            "w"
           ]
         }
       ],
@@ -117,6 +108,212 @@
       "id": 4,
       "name": "Organisation 4",
       "entreprise_id": 3
+    }
+  ],
+  "groups": [
+    {
+      "id": 12,
+      "name": "groupe11"
+    },
+    {
+      "id": 13,
+      "name": "groupe12"
+    },
+    {
+      "id": 14,
+      "name": "groupe14"
+    },
+    {
+      "id": 15,
+      "name": "groupe 15"
+    },
+    {
+      "id": 16,
+      "name": "ghf"
+    },
+    {
+      "id": 17,
+      "name": "GROUPE&-"
+    },
+    {
+      "id": 18,
+      "name": "groupe 15"
+    }
+  ],
+  "permissions": [
+    {
+      "id": 1,
+      "name": "x"
+    },
+    {
+      "id": 2,
+      "name": "w"
+    },
+    {
+      "id": 3,
+      "name": "r"
+    }
+  ],
+  "group_permissions": [
+    {
+      "id": 1,
+      "id_group": 2
+    },
+    {
+      "id": 2,
+      "id_group": 3
+    },
+    {
+      "id": 3,
+      "id_group": 4,
+      "id_permissions": true
+    },
+    {
+      "id": 4,
+      "id_group": 5,
+      "id_permissions": true
+    },
+    {
+      "id": 5,
+      "id_group": 6,
+      "id_permissions": false
+    },
+    {
+      "id": 6,
+      "id_group": 7,
+      "id_permissions": 1
+    },
+    {
+      "id": 7,
+      "id_group": 8,
+      "id_permissions": true
+    },
+    {
+      "id": 8,
+      "id_group": 9,
+      "id_permissions": true
+    },
+    {
+      "id": 9,
+      "id_group": 10,
+      "id_permissions": true
+    },
+    {
+      "id": 10,
+      "id_group": 11,
+      "id_permissions": true
+    },
+    {
+      "id": 11,
+      "id_group": 9,
+      "id_permissions": true
+    },
+    {
+      "id": 12,
+      "id_group": 10,
+      "id_permissions": true
+    },
+    {
+      "id": 13,
+      "id_group": 11,
+      "id_permissions": []
+    },
+    {
+      "id": 14,
+      "id_group": 12,
+      "id_permissions": false
+    },
+    {
+      "id": 15,
+      "id_group": 13,
+      "id_permissions": true
+    },
+    {
+      "id": 16,
+      "id_group": 15,
+      "id_permissions": true
+    },
+    {
+      "id": 17,
+      "id_group": 16,
+      "id_permissions": null
+    },
+    {
+      "id": 18,
+      "id_group": 12,
+      "id_permissions": 1
+    },
+    [],
+    [
+      {
+        "id": 0,
+        "id_group": 14,
+        "id_permssions": 1
+      }
+    ],
+    [],
+    [],
+    {
+      "id": 22,
+      "id_group": 17,
+      "id_permissions": []
+    },
+    {
+      "id": 23,
+      "id_group": 18,
+      "id_permissions": []
+    },
+    {
+      "id": 24,
+      "id_group": 19,
+      "id_permissions": [
+        1
+      ]
+    },
+    {
+      "id": 25,
+      "id_group": 20,
+      "id_permissions": []
+    },
+    {
+      "id": 26,
+      "id_group": 21,
+      "id_permissions": null
+    },
+    {
+      "id": 27,
+      "id_group": 22,
+      "id_permissions": null
+    },
+    {
+      "id": 28,
+      "id_group": 23,
+      "id_permissions": null
+    },
+    {
+      "id": 29,
+      "id_group": 22,
+      "id_permissions": null
+    },
+    {
+      "id": 30,
+      "id_group": 23,
+      "id_permissions": null
+    },
+    {
+      "id": 31,
+      "id_group": 21,
+      "id_permissions": null
+    },
+    {
+      "id": 32,
+      "id_group": 18,
+      "id_permissions": []
+    },
+    {
+      "id": 33,
+      "id_group": 19,
+      "id_permissions": null
     }
   ]
 }

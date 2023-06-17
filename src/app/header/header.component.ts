@@ -9,16 +9,21 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent {
   isLoggedIn$!:Observable<boolean>;
-  constructor(private router : Router,private _authService:AuthService) {}
+  isUserr:boolean=false;
+  constructor(private router : Router,private _authService:AuthService) {
+    //this.isUserr=true;
+  }
   ngOnInit() {
     this.isLoggedIn$ = this._authService.isLoggedIn();
     this.isLoggedIn$.subscribe(loggedIn => {
       console.log(loggedIn);
     });
+    
+    //console.log("user",this._authService.isUser());
+    //this.isUserr=this._authService.isUser()
+    
   }
-  isUser():boolean{
-    return this._authService.getRole()==='user';
-  }
+  
   goToHome(){
     this.router.navigate(['dashboard/top-cards']);
   }
@@ -36,5 +41,8 @@ export class HeaderComponent {
   }
   goToEntreprises(){
     this.router.navigate(['entreprises']);
+  }
+  goToGroups(){
+    this.router.navigate(['groups']);
   }
 }

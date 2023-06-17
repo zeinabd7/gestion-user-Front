@@ -16,6 +16,8 @@ import { UsersComponent } from './users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserheaderComponent } from './userheader/userheader.component';
+import { GroupsComponent } from './groups/groups.component';
+import { PermissionsComponent } from './groups/permissions/permissions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,8 @@ import { UserheaderComponent } from './userheader/userheader.component';
     HeaderComponent,
     UsersComponent,
     UserheaderComponent,
+    GroupsComponent,
+    PermissionsComponent,
     //UsersComponent
   ],
   imports: [

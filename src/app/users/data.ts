@@ -1,4 +1,6 @@
+import { Groups } from "../groups/data";
 export interface Users{
+
     id?:number;
     username?: string
     name?:string;
@@ -8,10 +10,9 @@ export interface Users{
     entreprise_id?:number;
     entreprise_name?:string;
     token?:string;
-    group:Group[],
+    group:Groups[],
 }
-export interface Group{
-    id:number;
-    name:string;
-    droits:string[];
-}
+
+
+
+export { Groups };

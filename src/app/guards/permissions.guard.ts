@@ -28,16 +28,18 @@ export class PermissionsGuard implements CanActivate {
       // let order: boolean
       // role == "user"?order = true : order = false
       // return order
-      let group=this.authService.getGroup()
-      if (group==="user") {
-        alert("Vous ne pouvez pas acceder à cette page")
-       this.router.navigate(['dashboard/top-cards'])
-      } else {
-        console.log("okkk");
+      //let group=this.authService.getGroup()
+    //   if (group==="user") {
+    //     alert("Vous ne pouvez pas acceder à cette page")
+    //    this.router.navigate(['dashboard/top-cards'])
+    //   } else {
+    //     console.log("okkk");
         
-      }
-      return true;
+    //   }
+    //   return true;
+    // }
+    return true
     }
-    }
+  }
     
   

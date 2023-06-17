@@ -38,10 +38,11 @@
                       </td>
                       <td >
                           <div class="d-flex align-items-center">
-                              <div class="ms-3" *ngFor="let gr of ts.group">
+                              <div class="ms-3" *ngFor="let gr of groups">
                                   <h5 class="mb-0 font-medium">{{gr.name}}</h5>
                                   
                               </div>
+                              <button class="btn mt-3" type="submit" style="color: blue;" (click)="openGroup(template1)">+</button>
                           </div>
                       </td>
                       <td>
@@ -107,8 +108,8 @@
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <label for="lastName" class="col-form-label col-sm-2 text-right">Groupe</label>
                 <div class="col-sm-5">
-                    <select  formControlName="group" class="form-control">
-                            <option *ngFor="let gr of group" [value]="gr.name">{{ gr.name }}</option>
+                    <select  formControlName="groupe" class="form-control">
+                            <option *ngFor="let gr of groups" [value]="gr.name">{{ gr.name }}</option>
                       </select>                  
                 </div>
             </div>
@@ -117,7 +118,7 @@
                 <label for="lastName" class="col-form-label col-sm-2 text-right">Entreprise</label>
                 <div class="col-sm-5">
                         <select  formControlName="entreprise_id" class="form-control">
-                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.id}}</option>
+                            <option *ngFor="let entreprise of entreprises" [ngValue]="entreprise.id">{{entreprise.name}}</option>
                         </select>                           
                 </div>
             </div>
@@ -206,6 +207,22 @@
               </div>
           </div>
       </div>  -->
+  </ng-template>
+  <ng-template #template1>
+    <div class="modal-body">
+        <div class="form-group row d-flex justify-content-center align-items-center" [formGroup]="userForm">
+            <label for="lastName" class="col-form-label col-sm-2 text-right">Groupe</label>
+            <div class="col-sm-5">
+                <div class="form-check"*ngFor="let gr of groups;let i =index" >
+                    <input class="form-check-input" type="checkbox" [value]="gr.id" >
+                    <label  class="form-check-label" for="" >
+                      {{gr.name}}
+                    </label>
+                  </div>
+            </div>
+           
+        </div>
+    </div>
   </ng-template>
   
   

@@ -39,19 +39,18 @@ export class OrgaListComponent {
       //this.entreprise_id =1;
     this.entreprise_id = this._entrepriseService.getEntrepriseId()
     this.showOrganizations(this.entreprise_id)
-        
-      }
-      showOrganizations(entreprise_id:number){
-        this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
-          next: (data:any) =>  {
-            this.organizations=data;
-          },
-          error: (err: any) => {
-            console.error(err);
-          },
-        });
+  }
+  showOrganizations(entreprise_id:number){
+    this.orgaService.getOrganizationsbyEntrepriseId(entreprise_id).subscribe({
+      next: (data:any) =>  {
+        this.organizations=data;
+      },
+      error: (err: any) => {
+        console.error(err);
+      },
+    });
 
-      }
+  }
 create(){
   
   if (this.organizationForm.valid){
