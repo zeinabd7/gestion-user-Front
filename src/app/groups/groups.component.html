@@ -2,12 +2,12 @@
 <div class="col-lg-7">
     <button class="btn mt-3" type="submit" style="color: blue;" (click)="openModal(template)">Ajouter Groupe</button>
   </div>
-   
+
   <div class="card">
       <div class="card-body">
           <!-- title -->
                   <h4 class="card-title">Liste des groupes</h4>
-                  
+
           <!-- title -->
           <div class="table-responsive">
               <table class="table align-middle">
@@ -16,7 +16,7 @@
                           <th class="text-dark font-medium fs-4">Nom</th>
                           <th class="text-dark font-medium fs-4">Permissions</th>
                           <th class="text-dark font-medium fs-4">Action</th>
-                          
+
                       </tr>
                   </thead>
                   <tbody>
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </td>
-                       
+
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="ms-3">
@@ -46,15 +46,15 @@
                                 </div>
                             </div>
                         </td>
-                       
-                        
-                    </tr>     
-                         
+
+
+                    </tr>
+
                 </tbody>
               </table>
           </div>
       </div>
-      
+
   </div>
   <!-- <router-outlet></router-outlet> -->
   <ng-template #template>
@@ -62,12 +62,12 @@
         <h4 class="modal-title" id="modal-basic-title">Group</h4>
     </div>
     <div class="modal-body">
-        <form [formGroup]="groupForm" (ngSubmit)="create()" >
+        <form [formGroup]="groupForm" >
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <label for="firstName" class="col-form-label col-sm-2 text-right">Nom</label>
                 <div class="col-sm-5">
                     <input type="text" formControlName="name" class="form-control" />
-                    
+
                 </div>
             </div>
             <br>
@@ -75,7 +75,7 @@
                 <label for="firstName" class="col-form-label col-sm-2 text-right">Permissions</label>
                 <div class="col-sm-5">
                     <button class="btn mt-3" type="submit" style="color: blue;" (click)="openPerm(template1)">permissions</button>
-                    
+
                 </div>
             </div> -->
             <div class="form-group row d-flex justify-content-center align-items-center">
@@ -88,32 +88,30 @@
                           {{p.name}}
                         </label>
                     </div> -->
-                    <ul >
-                        <li *ngFor="let p of permissions;let i =index">
-                            <input type="checkbox" [formControlName]="p.name" [checked]="isPermissionSelected(p.id)"> {{p.name}}
-                        </li>
-                    </ul>
-                     
+                  <ul>
+                    <li *ngFor="let p of permissionsFormArray.controls;let i =index">
+                      <input type="checkbox" (click)="onClickCheckBox(permissions[i].id)"> {{permissions[i].name}}
+                    </li>
+                  </ul>
+
                 </div>
             </div>
-           
+
             <div class="modal-footer">
-             <button type="submit" class="btn btn-primary" >{{this.groupForm.value.id ? 'Modifier': 'Ajouter'}}</button>
+             <button type="submit" class="btn btn-primary" (click)="submit()" >{{this.groupForm.value.id ? 'Modifier': 'Ajouter'}}</button>
 
                 <button  class="btn btn-primary mr-2" >Annuler</button>
             </div>
-    
+
         </form>
     </div>
-   
-     
-    </ng-template>
+  </ng-template>
     <ng-template #template1>
         <div class="modal-header bg-primary text-white" [formGroup]="groupForm">
             <h4 class="modal-title" id="modal-basic-title">Group</h4>
         </div>
         <div class="modal-body">
-               
+
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <label for="lastName" class="col-form-label col-sm-2 text-right">Permissions</label>
                     <div class="col-sm-5">
@@ -124,9 +122,9 @@
                               {{p.name}}
                             </label>
                           </div>
-                         
+
                     </div>
                 </div>
-               
+
         </div>
     </ng-template>

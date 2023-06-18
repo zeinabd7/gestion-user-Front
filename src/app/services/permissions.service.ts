@@ -10,13 +10,13 @@ permissions!:Permissions[];
   constructor(private http:HttpClient) {
     this.permissions=this.permissions;
    }
-  getPermissions(){
+  getPermissions(): Observable<Permissions[]>{
     return this.http.get<Permissions[]>('http://localhost:3000/permissions');
   }
-  getPermission(id:number):Observable<Permissions>{
+  getPermission(id:number): Observable<Permissions>{
     return this.http.get<Permissions>('http://localhost:3000/permissions/'+id);
   }
-  addPermissions(permission:Permissions):Observable<Permissions>{
+  addPermissions(permission: Permissions):Observable<Permissions>{
     return this.http.post<Permissions>('http://localhost:3000/permissions',permission);
   }
   updatePermissions(permission:Permissions):Observable<Permissions>{
@@ -25,5 +25,5 @@ permissions!:Permissions[];
   deletePermissions(id:number):Observable<Permissions>{
     return this.http.delete<Permissions>('http://localhost:3000/permissions/'+id);
   }
-  
+
 }
